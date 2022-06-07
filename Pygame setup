@@ -1,0 +1,42 @@
+# Basic Pygame setup 
+
+import pygame
+pygame.init()
+
+display = pygame.display.set_mode((500,500))
+pygame.display.set_caption("First Game")
+
+X = 0
+Y = 0
+
+while True:
+    pygame.time.delay(100) 
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
+
+   
+    keys = pygame.key.get_pressed()
+    
+    if keys[pygame.K_a]:
+        X -= 10
+
+    if keys[pygame.K_d]:
+        X += 10
+
+    if keys[pygame.K_w]:
+        Y -= 10
+
+    if keys[pygame.K_s]:
+        Y += 10
+    
+    display.fill((0,0,0)) # background color
+    color = (255,255,255) # square color
+    Width = 40
+    Height = 40
+    line_thickness = 3 # set to 0 for complete fill
+    pygame.draw.rect(display, color, (X, Y, Width, Height), line_thickness)   
+    pygame.display.update() 
+    
+pygame.quit()
