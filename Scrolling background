@@ -1,0 +1,34 @@
+import pygame
+from pygame.locals import *
+pygame.init()
+width = 1000
+height = 500
+window = pygame.display.set_mode((width,height))
+bg_img = pygame.image.load('/your/file/path/here')
+bg_img = pygame.transform.scale(bg_img,(width,height))
+ 
+i = 0                                   # sets i value before loop
+ 
+running = True
+while running:                           # start loop
+    window.fill((0,0,0))                # background screen black
+    window.blit(bg_img,(i,0))           # sets original image position
+    window.blit(bg_img,(width+i,0))     # sets additional image to the right
+    window.blit(bg_img,(-width+i,0))    # sets additional image to the left
+    if (i==-width):                     # sets marker to reset 
+        i=0                             # resests i value
+    if (i==width):                      # sets marker to reset
+        i=0                             # resests i value
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            running = False
+    keys = pygame.key.get_pressed()
+    
+    if keys[pygame.K_LEFT]:
+        i += 1
+
+    if keys[pygame.K_RIGHT]:
+        i -= 1
+        
+    pygame.display.update()
+pygame.quit()
