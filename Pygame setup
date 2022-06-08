@@ -9,12 +9,13 @@ pygame.display.set_caption("First Game")
 X = 0
 Y = 0
 
-while True:
+runing = True
+while runing:
     pygame.time.delay(100) 
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            run = False
+            runing = False
 
    
     keys = pygame.key.get_pressed()
