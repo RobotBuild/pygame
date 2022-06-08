@@ -1,0 +1,47 @@
+# Basic Pygame setup with background
+
+import pygame
+pygame.init()
+
+width,height = 1000,500
+window = pygame.display.set_mode((width,height))
+pygame.display.set_caption("First Game")
+bg_img = pygame.image.load('/your/file/path/here')
+bg_img = pygame.transform.scale(bg_img,(width,height))
+
+X = 0
+Y = 0
+
+run = True
+while run:
+    window.blit(bg_img,(0,0))
+    pygame.time.delay(100) 
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
+
+   
+    keys = pygame.key.get_pressed()
+    
+    if keys[pygame.K_a]:
+        X -= 10
+
+    if keys[pygame.K_d]:
+        X += 10
+
+    if keys[pygame.K_w]:
+        Y -= 10
+
+    if keys[pygame.K_s]:
+        Y += 10
+    
+    color = (0,0,0)
+    Width = 40
+    Height = 40
+    line_thickness = 3 # set to 0 for complete square fill
+    pygame.draw.rect(window, color, (X, Y, Width, Height), line_thickness)   
+    pygame.display.update() 
+    
+pygame.quit()
+
