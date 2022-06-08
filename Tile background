@@ -1,0 +1,54 @@
+import pygame
+from pygame.locals import *
+pygame.init()
+width = 1000
+height = 500
+window = pygame.display.set_mode((width,height))
+bg_img = pygame.image.load('/your/file/path/here')
+bg_img = pygame.transform.scale(bg_img,(width,height))
+ 
+i = 0                                   
+a = 0
+
+runing = True
+while runing:
+    window.fill((0,0,0))
+    window.blit(bg_img,(i,a))                 # center image   
+    window.blit(bg_img,(width+i,a))           # right image
+    window.blit(bg_img,(-width+i,a))          # left image
+    window.blit(bg_img,(i,height+a))          # bottom image
+    window.blit(bg_img,(i,-height+a))         # top image
+    window.blit(bg_img,(width+i,height+a))    # bottom right image
+    window.blit(bg_img,(-width+i,height+a))   # bottom left image
+    window.blit(bg_img,(-width+i,-height+a))  # top left image
+    window.blit(bg_img,(width+i,-height+a))   # top right image
+    
+    if (i==-width):                     
+        i=0
+    if (i==width):                      
+        i=0
+    if (a==-height):                     
+        a=0
+    if (a==height):                      
+        a=0
+
+   
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            runing = False
+    keys = pygame.key.get_pressed()
+    
+    if keys[pygame.K_LEFT]:
+        i += 1
+
+    if keys[pygame.K_RIGHT]:
+        i -= 1
+    
+    if keys[pygame.K_UP]:
+        a += 1
+
+    if keys[pygame.K_DOWN]:
+        a -= 1
+        
+    pygame.display.update()
+pygame.quit()
