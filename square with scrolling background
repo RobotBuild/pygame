@@ -1,0 +1,59 @@
+import pygame
+from pygame.locals import *
+pygame.init()
+width = 1000
+height = 500
+window = pygame.display.set_mode((width,height))
+bg_img = pygame.image.load('/your/file/path/here')
+bg_img = pygame.transform.scale(bg_img,(width,height))
+
+music = pygame.mixer.Sound('/your/file/path/here')
+music.play()
+
+X = 0
+Y = 0
+i = 0                                   # sets i value before loop
+
+running = True
+while running:
+    pygame.time.delay(0)                # slows things down
+    window.blit(bg_img,(i,0))           # sets original image position
+    window.blit(bg_img,(width+i,0))     # sets additional image to the right
+    window.blit(bg_img,(-width+i,0))    # sets additional image to the left
+    if (i==-width):                     # sets marker to reset 
+        i=0                             # resests i value
+    if (i==width):                      # sets marker to reset
+        i=0                             # resests i value
+    
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            running = False
+    
+    keys = pygame.key.get_pressed()
+    
+    if keys[pygame.K_LEFT]:
+        i += 1
+
+    if keys[pygame.K_RIGHT]:
+        i -= 1
+    
+    if keys[pygame.K_a]:
+        X -= 1
+
+    if keys[pygame.K_d]:
+        X += 1
+
+    if keys[pygame.K_w]:
+        Y -= 1
+
+    if keys[pygame.K_s]:
+        Y += 1
+
+    color = (0,0,0)
+    Width = 40
+    Height = 40
+    line_thickness = 3 # set to 0 for complete square fill
+    pygame.draw.rect(window, color, (X, Y, Width, Height), line_thickness)   
+    pygame.display.update() 
+
+pygame.quit()
