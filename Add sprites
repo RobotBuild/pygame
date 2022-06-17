@@ -1,0 +1,89 @@
+import pygame
+from pygame.locals import *
+pygame.init()
+width = 1000
+height = 500
+window = pygame.display.set_mode((1000,500))
+bg_img = pygame.image.load("/your/file/path/here")
+bg_img = pygame.transform.scale(bg_img,(width,height))
+image = pygame.image.load("/your/file/path/here")
+image = pygame.transform.scale(image,(75,75))
+
+
+music = pygame.mixer.Sound('/home/luke/Documents/music.wav')
+music.play()
+
+X = 0
+Y = 0
+i = 0
+a = 0
+b = 0
+
+
+running = True
+while running:
+    
+    pygame.time.delay(0) 
+    window.blit(bg_img,(i,0))           
+    window.blit(bg_img,(width+i,0))     
+    window.blit(bg_img,(-width+i,0))
+    window.blit(image,(a,b)) 
+    if (i==-width):                     
+        i=0                             
+    if (i==width):                      
+        i=0                             
+    
+    for event in pygame.event.get():
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_presses = pygame.mouse.get_pressed()
+            if mouse_presses[0]:
+                print("Left Mouse key was clicked")
+        if event.type == QUIT:
+            running = False
+    
+    keys = pygame.key.get_pressed()
+    
+    if keys[pygame.K_LEFT]:
+        i += 1
+
+    if keys[pygame.K_RIGHT]:
+        i -= 1
+    
+    if keys[pygame.K_a]:
+        X -= 1
+
+    if keys[pygame.K_d]:
+        X += 1
+
+    if keys[pygame.K_w]:
+        Y -= 1
+
+    if keys[pygame.K_s]:
+        Y += 1
+        
+    if keys[pygame.K_f]:
+        a -= 1
+
+    if keys[pygame.K_g]:
+        a += 1
+    
+    if keys[pygame.K_t]:
+        b -= 1
+
+    if keys[pygame.K_v]:
+        b += 1
+
+    if keys[pygame.K_w]:
+        Y -= 1
+
+    if keys[pygame.K_s]:
+        Y += 1
+        
+    color = (0,0,0)
+    Width = 40
+    Height = 40
+    line_thickness = 3 # set to 0 for complete square fill
+    pygame.draw.rect(window, color, (X, Y, Width, Height), line_thickness)   
+    pygame.display.update() 
+
+pygame.quit()
